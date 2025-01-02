@@ -71,6 +71,9 @@ div#footer-bar
         div.footer-bar-right
             each item in theme.footer.links
                 a.footer-bar-link(href=url_for(item.url), alt=item.name)!= item.name
+            a.footer-bar-link(href=url_for("https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"), title="又拍云")
+                i.iconfont.icon-upyun1
+                span.upyun= "又拍云"
             if theme.footer.license
                 a.footer-bar-link.cc(href=url_for(theme.footer.license))
                     i.solitude.fa-solid.fa-copyright
