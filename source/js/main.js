@@ -483,6 +483,19 @@ const sco = {
       }
     };
     utils.addEventListenerPjax(switchBtn, 'click', handleSwitchBtn);
+  },
+  homeTypeit() {
+    if(typeof(home_subtitle) === 'undefined') return;
+    const ty = new TypeIt(".banners-title-small", {
+        speed: 200,
+        waitUntilVisible: true,
+        loop: true,
+        lifeLike: true,
+    });
+    home_subtitle.forEach(item => {
+        ty.type(item).pause(500).delete(item);
+    });
+    ty.go();
   }
 };
 
@@ -691,7 +704,7 @@ class tabs {
     const { expire } = GLOBAL_CONFIG;
     if (!expire) return;
     const list = document.querySelectorAll('.post-meta-date time');
-    const post_date = list.length ? list[list.length - 1] : document.querySelector('.datatime');
+    const post_date = list.length ? list[list.length - 1] : document.querySelector('.datetime');
     if (!post_date) return;
     const ex = Math.ceil((new Date().getTime() - new Date(post_date.getAttribute('datetime')).getTime()) / 1000 / 60 / 60 / 24);
     if (expire.time > ex) return;
@@ -734,7 +747,7 @@ const forPostFn = () => {
 window.refreshFn = () => {
   const { is_home, is_page, page, is_post } = PAGE_CONFIG;
   const { runtime, lazyload, lightbox, randomlink, covercolor, post_ai, lure, expire } = GLOBAL_CONFIG;
-  const timeSelector = (is_home ? '.post-meta-date time' : is_post ? '.post-meta-date time' : '.datatime') + ', .webinfo-item time';
+  const timeSelector = (is_home ? '.post-meta-date time' : is_post ? '.post-meta-date time' : '.datetime') + ', .webinfo-item time';
   document.body.setAttribute('data-type', page);
   sco.changeTimeFormat(document.querySelectorAll(timeSelector));
   runtime && sco.addRuntime();
@@ -747,6 +760,7 @@ window.refreshFn = () => {
   initObserver();
   if (is_home) {
     showTodayCard();
+    sco.homeTypeit();
   }
   typeof updatePostsBasedOnComments === 'function' && updatePostsBasedOnComments();
   if (is_post || is_page) {
