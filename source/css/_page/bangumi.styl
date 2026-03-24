@@ -1,0 +1,283 @@
+#page.is-bangumi-wall
+  .article-container
+    > blockquote
+      margin 0 0 1rem
+
+  .bangumi-tabs
+    display flex !important
+    flex-wrap wrap
+    gap .55rem
+    margin 0 0 1rem
+
+    .bangumi-tab
+      display inline-flex
+      align-items center
+      justify-content center
+      min-height 2.35rem
+      padding 0 1rem
+      border-radius 999px
+      border var(--style-border-always)
+      background var(--efu-secondbg)
+      color var(--efu-secondtext)
+      font-weight 600
+      line-height 1
+      text-decoration none
+      cursor pointer
+      transition color .2s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease
+
+      &:hover
+        color var(--efu-fontcolor)
+        background var(--efu-card-bg)
+        border-color var(--efu-theme-op)
+
+    .bangumi-active
+      color var(--efu-white)
+      background linear-gradient(135deg, var(--efu-theme), var(--efu-main))
+      border-color transparent
+      box-shadow var(--efu-shadow-main)
+
+  #bangumi-item1,
+  #bangumi-item2,
+  #bangumi-item3
+    display none
+    gap 1rem
+    grid-template-columns repeat(auto-fill, minmax(220px, 1fr))
+    align-items start
+
+    &.bangumi-show
+      display grid
+
+    +maxWidth1400()
+      grid-template-columns repeat(auto-fill, minmax(210px, 1fr))
+
+    +maxWidth1200()
+      grid-template-columns repeat(auto-fill, minmax(190px, 1fr))
+
+    +maxWidth1024()
+      gap .9rem
+      grid-template-columns repeat(auto-fill, minmax(180px, 1fr))
+
+    +maxWidth768()
+      gap .8rem
+      grid-template-columns repeat(2, minmax(0, 1fr))
+
+  .bangumi-item
+    position relative
+    clear none !important
+    padding 0 !important
+    min-height 0 !important
+    aspect-ratio 3 / 4
+    border-radius 14px
+    border var(--style-border-always)
+    background var(--efu-card-bg)
+    box-shadow var(--efu-shadow-border)
+    overflow hidden
+    transition transform .25s ease, box-shadow .25s ease, border-color .25s ease
+
+    &:hover
+      border-color var(--efu-theme-op)
+      box-shadow var(--efu-shadow-main)
+      transform translateY(-4px)
+
+      .bangumi-info
+        opacity 1
+
+      .bangumi-meta,
+      .bangumi-summary,
+      .bangumi-comments
+        transform translateY(0)
+
+    &.bangumi-hide
+      display block !important
+
+  .bangumi-picture
+    position absolute !important
+    inset 0 !important
+    left 0 !important
+    top 0 !important
+    width 100% !important
+    height 100% !important
+    min-width 100% !important
+    min-height 100% !important
+    max-width none !important
+    overflow hidden
+
+    img
+      position absolute
+      inset 0
+      min-width 100% !important
+      min-height 100% !important
+      max-width none !important
+      width 100% !important
+      height 100% !important
+      margin 0 !important
+      object-fit cover
+      object-position center center
+      display block !important
+
+  .bangumi-info
+    position absolute
+    left 0
+    right 0
+    bottom 0
+    top auto
+    z-index 2
+    min-height 0
+    padding .72rem .72rem .72rem !important
+    padding-left .72rem !important
+    margin-top 0 !important
+    display flex
+    flex-direction column
+    justify-content flex-end
+    gap .36rem
+    opacity 0
+    color var(--efu-white)
+    background linear-gradient(to top, rgba(8, 11, 18, .93) 0%, rgba(8, 11, 18, .75) 58%, rgba(8, 11, 18, 0) 100%)
+    transition opacity .25s ease
+
+    +maxWidth768()
+      opacity 1
+
+  .bangumi-title
+    margin 0
+    font-size .95rem
+    font-weight 700
+    line-height 1.3
+
+    a
+      color inherit
+      text-decoration none
+      display -webkit-box
+      overflow hidden
+      -webkit-line-clamp 2
+      line-clamp 2
+      -webkit-box-orient vertical
+
+  .bangumi-meta,
+  .bangumi-summary,
+  .bangumi-comments
+    margin 0
+    transform translateY(6px)
+    transition transform .25s ease
+
+    +maxWidth768()
+      transform translateY(0)
+
+  .bangumi-meta
+    height auto !important
+    padding 0
+
+  .bangumi-summary,
+  .bangumi-comments
+    display none !important
+
+  .bangumi-info-items
+    width auto !important
+    height auto !important
+    float none
+    padding 0
+    line-height 1.15
+    color rgba(255, 255, 255, .95) !important
+
+  .bangumi-info-item
+    display none
+    width auto !important
+    height auto !important
+    border-right 0 !important
+    text-align left
+
+    &.bangumi-info-item-score
+      display inline-flex
+      align-items center
+      gap .25rem
+      font-weight 700
+
+      .bangumi-info-label
+        font-size .75rem
+        color rgba(255, 255, 255, .75)
+
+      em
+        padding 0
+        line-height 1
+        font-size .81rem
+
+  .bangumi-progress
+    position relative
+    left auto
+    right auto
+    bottom auto
+    z-index 1
+    margin-top .32rem !important
+    max-width 100%
+    min-height 1.86rem
+    display flex
+    align-items center
+    justify-content center
+    box-sizing border-box
+    overflow hidden
+    padding .32rem .64rem !important
+    border-radius 11px
+    border 1px solid rgba(255, 255, 255, .2)
+    background rgba(255, 255, 255, .16)
+    backdrop-filter blur(8px)
+    -webkit-backdrop-filter blur(8px)
+
+    .bangumi-progress-text
+      display block
+      position relative
+      z-index 3
+      font-size .71rem
+      line-height 1.25
+      color rgba(255, 255, 255, .9)
+      margin 0
+      text-align center
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+
+    .progress-bar
+      position absolute
+      top 0
+      left 0
+      bottom 0
+      z-index 1
+      display block
+      height auto !important
+      min-height 0
+      max-width 100%
+      border-radius 0 11px 11px 0
+      background var(--efu-theme) !important
+      background-image linear-gradient(90deg, var(--efu-theme), var(--efu-main)) !important
+      box-shadow inset 0 0 0 1px rgba(255, 255, 255, .15), 0 0 12px rgba(66, 89, 239, .3)
+
+  .bangumi-pagination
+    display none !important
+    grid-column 1 / -1
+    margin .6rem 0 0
+    padding .4rem .5rem
+    border-radius 999px
+    background var(--efu-card-bg)
+    border var(--style-border-always)
+    box-shadow var(--efu-shadow-border)
+    display inline-flex
+    align-items center
+    justify-content center
+    justify-self center
+    gap .35rem
+    flex-wrap wrap
+
+    .bangumi-button
+      padding .32rem .72rem
+      border-radius 999px
+      color var(--efu-secondtext)
+      line-height 1.1
+      transition color .2s ease, background .2s ease
+
+      &:hover
+        color var(--efu-white)
+        background var(--efu-theme)
+
+    .bangumi-pagenum
+      padding 0 .35rem
+      font-size .82rem
+      color var(--efu-secondtext)

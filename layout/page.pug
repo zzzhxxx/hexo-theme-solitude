@@ -10,7 +10,9 @@ include includes/mixins/common.pug
 
 //- 页面内容渲染mixin
 mixin pageContent()
-  #page
+  - const currentPageKey = (((page.path || '').split('/')[0]) || ((page.title || '') + '')).toLowerCase()
+  - const isBangumiWallPage = currentPageKey === 'bangumi' || currentPageKey === 'drama'
+  #page(data-page=currentPageKey class=isBangumiWallPage ? 'is-bangumi-wall' : '')
     case page.type
       when 'message'
         != partial('includes/page/message', {}, {cache: true})
